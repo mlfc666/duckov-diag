@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    构建前需要告诉项目游戏在哪里（二选一）：
+      1) 命令行： dotnet build -c Release -p:GameDir="/path/to/Escape from Duckov"
+      2) 环境变量： export DUCKOV_GAME_DIR="/path/to/Escape from Duckov"
+                    export DUCKOV_HARMONY_DLL="/path/to/some/mod/0Harmony.dll"
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>DuckovDiag</AssemblyName>
+    <RootNamespace>DuckovDiag</RootNamespace>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <Deterministic>true</Deterministic>
+    <DebugType>none</DebugType>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <NoWarn>CS0649;CS0169;CS0618</NoWarn>
+
+    <GameDir Condition="'$(GameDir)' == ''">$(DUCKOV_GAME_DIR)</GameDir>
+    <HarmonyDll Condition="'$(HarmonyDll)' == ''">$(DUCKOV_HARMONY_DLL)</HarmonyDll>
+    <GameManaged>$(GameDir)/Duckov_Data/Managed</GameManaged>
+  </PropertyGroup>
+
+  <Target Name="CheckGameDir" BeforeTargets="BeforeBuild" Condition="'$(GameDir)' == ''">
+    <Error Text="未设置 GameDir：请用 -p:GameDir=... 或环境变量 DUCKOV_GAME_DIR 指定游戏安装目录。" />
+  </Target>
+
+  <ItemGroup>
+    <Compile Include="src/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>$(HarmonyDll)</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="ItemStatsSystem">
+      <HintPath>$(GameManaged)/ItemStatsSystem.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TeamSoda.Duckov.Core">
+      <HintPath>$(GameManaged)/TeamSoda.Duckov.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(GameManaged)/UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(GameManaged)/UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>
