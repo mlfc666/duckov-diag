@@ -8,6 +8,14 @@
 
 ---
 
+## Steam 创意工坊
+
+工坊搜索 **「崩溃诊断 DuckovDiag」**（发布后此页会更新链接）。
+
+源码仓库：<https://github.com/mlfc666/duckov-diag>
+
+---
+
 ## 功能
 
 | 日志标签 | 内容 |
