@@ -10,7 +10,8 @@
 
 ## Steam 创意工坊
 
-工坊搜索 **「崩溃诊断 DuckovDiag」**（发布后此页会更新链接）。
+- 工坊条目：<https://steamcommunity.com/sharedfiles/filedetails/?id=3829975098>
+- 或搜索 **「崩溃诊断 DuckovDiag」**
 
 源码仓库：<https://github.com/mlfc666/duckov-diag>
 
